@@ -7,93 +7,93 @@ using ServiceStack.Configuration;
 
 namespace ServiceStack.Text.Tests
 {
-    [TestFixture]
-    public class FreeLicenseUsageTests : LicenseUsageTests
-    {
-        [SetUp]
-        public void SetUp()
-        {
-            LicenseUtils.RemoveLicense();
-            JsConfig.Reset();
-        }
+    //[TestFixture]
+    //public class FreeLicenseUsageTests : LicenseUsageTests
+    //{
+    //    [SetUp]
+    //    public void SetUp()
+    //    {
+    //        LicenseUtils.RemoveLicense();
+    //        JsConfig.Reset();
+    //    }
 
-        [TearDown]
-        public void TearDown()
-        {
-            Licensing.RegisterLicense(new AppSettings().GetString("servicestack:license"));
-        }
+    //    [TearDown]
+    //    public void TearDown()
+    //    {
+    //        Licensing.RegisterLicense(new AppSettings().GetString("servicestack:license"));
+    //    }
 
-        [Test]
-        public void Allows_serialization_of_20_types()
-        {
-            Serialize20();
-            Serialize20();
-        }
+    //    [Test]
+    //    public void Allows_serialization_of_20_types()
+    //    {
+    //        Serialize20();
+    //        Serialize20();
+    //    }
 
-        [Test]
-        public void Allows_deserialization_of_20_types()
-        {
-            Deserialize20();
-            Deserialize20();
-        }
+    //    [Test]
+    //    public void Allows_deserialization_of_20_types()
+    //    {
+    //        Deserialize20();
+    //        Deserialize20();
+    //    }
 
-        [Test]
-        public void Allows_mixed_serialization_of_20_types()
-        {
-            SerializeTop10();
-            DeserializeTop10();
-            SerializeBottom10();
-            DeserializeBottom10();
-        }
+    //    [Test]
+    //    public void Allows_mixed_serialization_of_20_types()
+    //    {
+    //        SerializeTop10();
+    //        DeserializeTop10();
+    //        SerializeBottom10();
+    //        DeserializeBottom10();
+    //    }
 
-        [Test]
-        public void Throws_on_serialization_of_21_types()
-        {
-            Serialize20();
-            Serialize20();
+    //    [Test]
+    //    public void Throws_on_serialization_of_21_types()
+    //    {
+    //        Serialize20();
+    //        Serialize20();
 
-            Assert.Throws<LicenseException>(() => new T21().ToJson());
-        }
+    //        Assert.Throws<LicenseException>(() => new T21().ToJson());
+    //    }
 
-        [Test]
-        public void Throws_on_deserialization_of_21_types()
-        {
-            Deserialize20();
-            Deserialize20();
+    //    [Test]
+    //    public void Throws_on_deserialization_of_21_types()
+    //    {
+    //        Deserialize20();
+    //        Deserialize20();
 
-            Assert.Throws<LicenseException>(() =>
-                "{\"Id\":1}".FromJson<T21>());
-        }
+    //        Assert.Throws<LicenseException>(() =>
+    //            "{\"Id\":1}".FromJson<T21>());
+    //    }
 
-        [Test]
-        public void Throws_on_mixed_serialization_of_21_types()
-        {
-            SerializeTop10();
-            DeserializeTop10();
-            SerializeBottom10();
-            DeserializeBottom10();
+    //    [Test]
+    //    public void Throws_on_mixed_serialization_of_21_types()
+    //    {
+    //        SerializeTop10();
+    //        DeserializeTop10();
+    //        SerializeBottom10();
+    //        DeserializeBottom10();
 
-            Assert.Throws<LicenseException>(() => new T21().ToJson());
-        }
-    }
+    //        Assert.Throws<LicenseException>(() => new T21().ToJson());
+    //    }
+    //}
 
-    [TestFixture]
-    public class RegisteredLicenseUsageTests : LicenseUsageTests
-    {
-        [Test]
-        public void Allows_serialization_of_21_types()
-        {
-            Licensing.RegisterLicense(new AppSettings().GetString("servicestack:license"));
+    //[TestFixture]
+    //public class RegisteredLicenseUsageTests : LicenseUsageTests
+    //{
+    //    [Test]
+    //    public void Allows_serialization_of_21_types()
+    //    {
+    //        Licensing.RegisterLicense(new AppSettings().GetString("servicestack:license"));
 
-            Serialize20();
-            Serialize20();
-            Deserialize20();
-            Deserialize20();
+    //        Serialize20();
+    //        Serialize20();
+    //        Deserialize20();
+    //        Deserialize20();
 
-            new T21().ToJson();
-            "{\"Id\":1}".FromJson<T21>();
-        }
-    }
+    //        new T21().ToJson();
+    //        "{\"Id\":1}".FromJson<T21>();
+    //    }
+    //}
     
     class T01 { public int Id { get; set; } }
     class T02 { public int Id { get; set; } }
