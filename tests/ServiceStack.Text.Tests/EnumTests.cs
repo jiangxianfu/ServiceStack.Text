@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using NUnit.Framework;
 
 namespace ServiceStack.Text.Tests
@@ -149,12 +150,33 @@ namespace ServiceStack.Text.Tests
         {
             Assert.That("Word".FromJson<EnumStyles>(), Is.EqualTo(EnumStyles.Word));
             Assert.That("DoubleWord".FromJson<EnumStyles>(), Is.EqualTo(EnumStyles.DoubleWord));
+            Assert.That("Underscore_Words".FromJson<EnumStyles>(), Is.EqualTo(EnumStyles.Underscore_Words));
 
             using (JsConfig.With(emitLowercaseUnderscoreNames: true))
             {
                 Assert.That("Double_Word".FromJson<EnumStyles>(), Is.EqualTo(EnumStyles.DoubleWord));
+                Assert.That("Underscore_Words".FromJson<EnumStyles>(), Is.EqualTo(EnumStyles.Underscore_Words));
             }
         }
+
+        [DataContract]
+        public class NullableEnum
+        {
+            [DataMember(Name = "myEnum")]
+            public EnumWithoutFlags? MyEnum { get; set; }
+        }
+
+        [Test]
+        public void Can_deserialize_null_Nullable_Enum()
+        {
+            JsConfig.ThrowOnDeserializationError = true;
+            string json = @"{""myEnum"":null}";
+            var o = json.FromJson<NullableEnum>();
+            Assert.That(o.MyEnum, Is.Null);
+
+            JsConfig.Reset();
+        }
+
     }
 }
 

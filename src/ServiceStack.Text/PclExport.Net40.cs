@@ -120,8 +120,8 @@ namespace ServiceStack
                 : Directory.GetDirectories(dirPath);
         }
 
-        public const string AppSettingsKey = "servicestack:license";
-        public const string EnvironmentKey = "SERVICESTACK_LICENSE";
+        //public const string AppSettingsKey = "servicestack:license";
+        //public const string EnvironmentKey = "SERVICESTACK_LICENSE";
 
 //        public override void RegisterLicenseFromConfig()
 //        {

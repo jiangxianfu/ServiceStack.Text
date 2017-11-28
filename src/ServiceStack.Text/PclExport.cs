@@ -170,9 +170,9 @@ namespace ServiceStack
         {
         }
 
-        public virtual void RegisterLicenseFromConfig()
-        {            
-        }
+        //public virtual void RegisterLicenseFromConfig()
+        //{            
+        //}
 
         public virtual string GetEnvironmentVariable(string name)
         {
