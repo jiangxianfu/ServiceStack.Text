@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("ServiceStack")]
-[assembly: AssemblyProduct("ServiceStack.Text.Jiangxf")]
+[assembly: AssemblyProduct("ServiceStack.Text.jiangxf")]
 [assembly: AssemblyCopyright("Copyright © ServiceStack 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -19,7 +19,9 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
+#if !PCL
 [assembly: Guid("a352d4d3-df2a-4c78-b646-67181a6333a6")]
+#endif
 
 // Version information for an assembly consists of the following four values:
 //
@@ -31,5 +33,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("4.0.0.2")]
-[assembly: AssemblyFileVersion("4.0.0.2")]
+[assembly: AssemblyVersion("4.0.0.3")]
+[assembly: AssemblyFileVersion("4.0.0.3")]

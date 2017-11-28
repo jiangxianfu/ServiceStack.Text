@@ -2,6 +2,7 @@
 //License: https://raw.github.com/ServiceStack/ServiceStack/master/license.txt
 
 using System;
+using System.Globalization;
 using System.IO;
 
 namespace ServiceStack.Text
@@ -18,7 +19,8 @@ namespace ServiceStack.Text
             {
                 IsMono = AssemblyUtils.FindType("Mono.Runtime") != null;
 
-                IsMonoTouch = AssemblyUtils.FindType("MonoTouch.Foundation.NSObject") != null;
+                IsMonoTouch = AssemblyUtils.FindType("MonoTouch.Foundation.NSObject") != null
+                    || AssemblyUtils.FindType("Foundation.NSObject") != null;
 
                 IsAndroid = AssemblyUtils.FindType("Android.Manifest") != null;
 
@@ -46,8 +48,12 @@ namespace ServiceStack.Text
                 + platformName
                 + (IsMono ? "/Mono" : "/.NET");
 
-            __releaseDate = DateTime.Parse("2001-01-01");
+            VersionString = ServiceStackVersion.ToString(CultureInfo.InvariantCulture);
+
+            __releaseDate = new DateTime(2001,01,01);
         }
+
+        public static string VersionString { get; set; }
 
         public static decimal ServiceStackVersion = 4.00m;
 

@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
-using System.Reflection;
 using ServiceStack.Text.Json;
 using ServiceStack.Text.Jsv;
 
@@ -51,16 +49,20 @@ namespace ServiceStack.Text.Common
                     var explicitTypeName = Serializer.ParseString(propertyValueStr);
                     var explicitType = JsConfig.TypeFinder(explicitTypeName);
 
-                    if (explicitType != null && !explicitType.IsInterface() && !explicitType.IsAbstract())
+                    if (explicitType == null || explicitType.IsInterface() || explicitType.IsAbstract())
+                    {
+                        Tracer.Instance.WriteWarning("Could not find type: " + propertyValueStr);
+                    }
+                    else if (!type.IsAssignableFromType(explicitType))
+                    {
+                        Tracer.Instance.WriteWarning("Could not assign type: " + propertyValueStr);
+                    }
+                    else
                     {
                         instance = explicitType.CreateInstance();
                     }
 
-                    if (instance == null)
-                    {
-                        Tracer.Instance.WriteWarning("Could not find type: " + propertyValueStr);
-                    }
-                    else
+                    if (instance != null)
                     {
                         //If __type info doesn't match, ignore it.
                         if (!type.InstanceOfType(instance))
